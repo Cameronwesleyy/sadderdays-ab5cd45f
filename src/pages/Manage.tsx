@@ -976,7 +976,7 @@ const AdminDashboard = () => {
                     <div>
                       <p className="text-sm text-white">{content.vinyl_name || "YIN/YANG VINYL"}</p>
                       <p className="text-xs text-white/50 mt-1">${content.vinyl_price || "30"}.00</p>
-                      <p className="text-[10px] text-white/30 mt-2 line-clamp-2">{content.vinyl_description || "Limited edition 12\" vinyl pressing."}</p>
+                      <p className="text-[10px] text-white/30 mt-2 line-clamp-2">{content.vinyl_description || "Limited edition vinyl pressing."}</p>
                     </div>
                   </div>
                 </div>
