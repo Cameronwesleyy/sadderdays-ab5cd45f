@@ -7,14 +7,23 @@ import merch03 from "@/assets/merch-03.jpg";
 import merch04 from "@/assets/merch-04.jpg";
 import merch05 from "@/assets/merch-05.jpg";
 import merch06 from "@/assets/merch-06.jpg";
+import vinylPlaceholder from "@/assets/vinyl-placeholder.jpg";
 
 const products = [
-  { id: "lw-01", name: "LOUNGEWEAR PACK", variant: "01", price: 28, image: merch01 },
-  { id: "lw-02", name: "LOUNGEWEAR PACK", variant: "02", price: 28, image: merch02 },
-  { id: "lw-03", name: "LOUNGEWEAR PACK", variant: "03", price: 28, image: merch03 },
-  { id: "lw-04", name: "LOUNGEWEAR PACK", variant: "04", price: 28, image: merch04 },
-  { id: "lw-05", name: "LOUNGEWEAR PACK", variant: "05", price: 28, image: merch05 },
-  { id: "lw-06", name: "LOUNGEWEAR PACK", variant: "06", price: 28, image: merch06 },
+  { id: "lw-01", name: "LOUNGEWEAR PACK", variant: "01", price: 28, image: merch01, type: "apparel" as const },
+  { id: "lw-02", name: "LOUNGEWEAR PACK", variant: "02", price: 28, image: merch02, type: "apparel" as const },
+  { id: "lw-03", name: "LOUNGEWEAR PACK", variant: "03", price: 28, image: merch03, type: "apparel" as const },
+  { id: "lw-04", name: "LOUNGEWEAR PACK", variant: "04", price: 28, image: merch04, type: "apparel" as const },
+  { id: "lw-05", name: "LOUNGEWEAR PACK", variant: "05", price: 28, image: merch05, type: "apparel" as const },
+  { id: "lw-06", name: "LOUNGEWEAR PACK", variant: "06", price: 28, image: merch06, type: "apparel" as const },
+  { 
+    id: "vinyl-01", 
+    name: "YIN/YANG VINYL", 
+    variant: "LP", 
+    price: 30, 
+    image: vinylPlaceholder, 
+    type: "vinyl" as const,
+  },
 ];
 
 const Merch = () => {
@@ -65,13 +74,14 @@ const Merch = () => {
                     src={product.image}
                     alt={product.name}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    loading="lazy"
                   />
                 </div>
 
                 {/* Info - minimal */}
                 <div className="py-2 flex justify-between items-baseline">
                   <span className="text-[9px] tracking-widest-custom">
-                    {product.variant}
+                    {product.type === "vinyl" ? product.name : product.variant}
                   </span>
                   <span className="text-[9px] tracking-widest-custom text-muted-foreground">
                     ${product.price}
