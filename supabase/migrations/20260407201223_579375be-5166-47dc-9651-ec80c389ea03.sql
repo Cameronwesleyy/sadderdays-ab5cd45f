@@ -1,0 +1,1 @@
+UPDATE admin_settings SET value = 'true', updated_at = now() WHERE id = 'shop_live';
