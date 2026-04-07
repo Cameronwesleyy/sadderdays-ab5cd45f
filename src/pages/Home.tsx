@@ -183,7 +183,7 @@ const Home = () => {
         >
           <div className="flex items-center gap-4 md:gap-6">
             {shopLive ? (
-              <Link to="/merch" className="text-[9px] md:text-[10px] tracking-widest-custom text-white/80 hover:text-white transition-colors drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]">
+              <Link to="/product/vinyl-01" className="text-[9px] md:text-[10px] tracking-widest-custom text-white/80 hover:text-white transition-colors drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]">
                 SHOP
               </Link>
             ) : (
@@ -354,7 +354,7 @@ const Home = () => {
             <div className="text-left">
               <h2 className="font-display text-5xl md:text-7xl tracking-tighter-custom mb-4">{shopTitle}</h2>
               {shopLive ? (
-                <Link to="/merch" className="text-xs font-medium tracking-widest-custom text-sd-pink hover:text-foreground transition-colors">
+                <Link to="/product/vinyl-01" className="text-xs font-medium tracking-widest-custom text-sd-pink hover:text-foreground transition-colors">
                   SHOP NOW →
                 </Link>
               ) : (
