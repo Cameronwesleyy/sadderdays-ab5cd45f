@@ -12,7 +12,7 @@ const Product = () => {
     name: "YIN/YANG VINYL",
     price: "30",
     description: 'Limited edition 12" vinyl pressing of YIN/YANG. 180g black vinyl with custom sleeve artwork. Includes digital download.',
-    purchaseUrl: "https://example.com/purchase-vinyl",
+    purchaseUrl: "https://vertigovinyl.com/vve/p/sadder-days",
     image: "",
     format: '12" Vinyl LP',
     weight: "180g",
