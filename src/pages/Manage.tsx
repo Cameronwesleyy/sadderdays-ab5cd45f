@@ -959,6 +959,22 @@ const AdminDashboard = () => {
 
             {activeTab === "shop" && (
               <TabPanel key="shop">
+                {/* Shop Live Toggle */}
+                <div className="flex items-center justify-between p-4 border border-white/10 mb-8">
+                  <div>
+                    <p className="text-sm text-white font-medium">Shop Status</p>
+                    <p className="text-[10px] text-white/40 mt-1">
+                      {shopLive ? "Shop is live and accessible" : "Shop is hidden — shows \"COMING SOON\" in navigation"}
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => setShopLive(!shopLive)}
+                    className={`relative w-12 h-6 rounded-full transition-colors ${shopLive ? "bg-green-500" : "bg-white/20"}`}
+                  >
+                    <span className={`absolute top-0.5 left-0.5 w-5 h-5 rounded-full bg-white transition-transform ${shopLive ? "translate-x-6" : ""}`} />
+                  </button>
+                </div>
+
                 <SectionTitle>Vinyl Product Details</SectionTitle>
                 <p className="text-white/40 text-xs mb-8 leading-relaxed">
                   Edit the vinyl listing that appears on the Shop page and Product detail page.
