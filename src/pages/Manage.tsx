@@ -144,7 +144,7 @@ interface SongEntry {
   sort_order: number;
 }
 
-type Tab = "home" | "copy" | "members" | "tour" | "music" | "lyrics" | "lab" | "shopify" | "meta";
+type Tab = "home" | "copy" | "members" | "tour" | "music" | "lyrics" | "lab" | "shop" | "shopify" | "meta";
 
 interface QuizQuestion {
   question: string;
@@ -270,7 +270,8 @@ const AdminDashboard = () => {
     { id: "music", label: "MUSIC", icon: <Music size={14} /> },
     { id: "lyrics", label: "LYRICS", icon: <BookOpen size={14} /> },
     { id: "lab", label: "LAB", icon: <FlaskConical size={14} /> },
-    { id: "shopify", label: "SHOPIFY", icon: <ShoppingBag size={14} /> },
+    { id: "shop", label: "SHOP / VINYL", icon: <ShoppingBag size={14} /> },
+    { id: "shopify", label: "SHOPIFY", icon: <Link2 size={14} /> },
     { id: "meta", label: "META / SEO", icon: <Settings size={14} /> },
   ];
 
@@ -953,6 +954,53 @@ const AdminDashboard = () => {
                     </div>
                   ))}
                 </div>
+              </TabPanel>
+            )}
+
+            {activeTab === "shop" && (
+              <TabPanel key="shop">
+                <SectionTitle>Vinyl Product Details</SectionTitle>
+                <p className="text-white/40 text-xs mb-8 leading-relaxed">
+                  Edit the vinyl listing that appears on the Shop page and Product detail page.
+                </p>
+
+                {/* Live Preview */}
+                <div className="p-5 border border-white/10 mb-8">
+                  <p className="text-[9px] tracking-widest-custom text-white/40 mb-4">PRODUCT PREVIEW</p>
+                  <div className="flex gap-6">
+                    <div className="w-24 h-24 bg-white/5 overflow-hidden flex-shrink-0">
+                      {content.vinyl_image && (
+                        <img src={content.vinyl_image} alt="Vinyl" className="w-full h-full object-cover" />
+                      )}
+                    </div>
+                    <div>
+                      <p className="text-sm text-white">{content.vinyl_name || "YIN/YANG VINYL"}</p>
+                      <p className="text-xs text-white/50 mt-1">${content.vinyl_price || "30"}.00</p>
+                      <p className="text-[10px] text-white/30 mt-2 line-clamp-2">{content.vinyl_description || "Limited edition vinyl pressing."}</p>
+                    </div>
+                  </div>
+                </div>
+
+                <Field label="Product Name" value={content.vinyl_name || ""} onChange={(v) => updateContent("vinyl_name", v)} placeholder="YIN/YANG VINYL" />
+                <Field label="Price (number only)" value={content.vinyl_price || ""} onChange={(v) => updateContent("vinyl_price", v)} placeholder="30" />
+                <TextArea label="Description" value={content.vinyl_description || ""} onChange={(v) => updateContent("vinyl_description", v)} rows={4} />
+                <Field label="External Purchase URL" value={content.vinyl_purchase_url || ""} onChange={(v) => updateContent("vinyl_purchase_url", v)} placeholder="https://example.com/purchase-vinyl" />
+
+                <SectionTitle className="mt-10">Product Image</SectionTitle>
+                <p className="text-white/40 text-xs mb-4">Override the album cover with a custom product image (optional). If empty, the latest album cover is used.</p>
+                <ImageDropZone
+                  label="Vinyl Product Image"
+                  currentUrl={content.vinyl_image || ""}
+                  contentKey="vinyl_image"
+                  folder="shop"
+                  defaultUrl=""
+                  onUpload={(key, url) => updateContent(key, url === "__removed__" ? "" : url)}
+                />
+
+                <SectionTitle className="mt-10">Format Details</SectionTitle>
+                <Field label="Format" value={content.vinyl_format || ""} onChange={(v) => updateContent("vinyl_format", v)} placeholder='12" Vinyl LP' />
+                <Field label="Weight" value={content.vinyl_weight || ""} onChange={(v) => updateContent("vinyl_weight", v)} placeholder="180g" />
+                <Field label="Includes" value={content.vinyl_includes || ""} onChange={(v) => updateContent("vinyl_includes", v)} placeholder="Digital Download" />
               </TabPanel>
             )}
 

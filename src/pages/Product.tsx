@@ -8,11 +8,43 @@ const Product = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [coverUrl, setCoverUrl] = useState("");
+  const [vinyl, setVinyl] = useState({
+    name: "YIN/YANG VINYL",
+    price: "30",
+    description: 'Limited edition 12" vinyl pressing of YIN/YANG. 180g black vinyl with custom sleeve artwork. Includes digital download.',
+    purchaseUrl: "https://example.com/purchase-vinyl",
+    image: "",
+    format: '12" Vinyl LP',
+    weight: "180g",
+    includes: "Digital Download",
+  });
 
   useEffect(() => {
-    supabase.from("music_releases").select("cover_url").order("sort_order", { ascending: true }).limit(1).single().then(({ data }) => {
-      if (data?.cover_url) setCoverUrl(data.cover_url);
-    });
+    const load = async () => {
+      const [contentRes, releaseRes] = await Promise.all([
+        supabase.from("site_content").select("*").in("id", [
+          "vinyl_name", "vinyl_price", "vinyl_description", "vinyl_purchase_url",
+          "vinyl_image", "vinyl_format", "vinyl_weight", "vinyl_includes",
+        ]),
+        supabase.from("music_releases").select("cover_url").order("sort_order", { ascending: true }).limit(1).single(),
+      ]);
+      if (releaseRes.data?.cover_url) setCoverUrl(releaseRes.data.cover_url);
+      if (contentRes.data) {
+        const map: Record<string, string> = {};
+        contentRes.data.forEach((r) => { map[r.id] = r.content; });
+        setVinyl((prev) => ({
+          name: map.vinyl_name || prev.name,
+          price: map.vinyl_price || prev.price,
+          description: map.vinyl_description || prev.description,
+          purchaseUrl: map.vinyl_purchase_url || prev.purchaseUrl,
+          image: map.vinyl_image || prev.image,
+          format: map.vinyl_format || prev.format,
+          weight: map.vinyl_weight || prev.weight,
+          includes: map.vinyl_includes || prev.includes,
+        }));
+      }
+    };
+    load();
   }, []);
 
   if (id !== "vinyl-01") {
@@ -25,8 +57,12 @@ const Product = () => {
     );
   }
 
+  const displayImage = vinyl.image || coverUrl;
+
   const handleExternalPurchase = () => {
-    window.open("https://example.com/purchase-vinyl", "_blank", "noopener,noreferrer");
+    if (vinyl.purchaseUrl) {
+      window.open(vinyl.purchaseUrl, "_blank", "noopener,noreferrer");
+    }
   };
 
   return (
@@ -49,10 +85,10 @@ const Product = () => {
               transition={{ delay: 0.1 }}
             >
               <div className="aspect-square overflow-hidden">
-                {coverUrl && (
+                {displayImage && (
                   <img
-                    src={coverUrl}
-                    alt="YIN/YANG VINYL"
+                    src={displayImage}
+                    alt={vinyl.name}
                     className="w-full h-full object-cover"
                   />
                 )}
@@ -70,10 +106,10 @@ const Product = () => {
               </p>
 
               <h1 className="text-4xl md:text-5xl font-display tracking-tighter-custom mb-6">
-                YIN/YANG VINYL
+                {vinyl.name}
               </h1>
 
-              <p className="text-2xl mb-12">$30.00</p>
+              <p className="text-2xl mb-12">${vinyl.price}.00</p>
 
               <button
                 onClick={handleExternalPurchase}
@@ -89,16 +125,16 @@ const Product = () => {
               <div className="border-t border-border pt-8">
                 <p className="text-[10px] tracking-widest-custom mb-4">DESCRIPTION</p>
                 <p className="text-sm leading-relaxed text-muted-foreground">
-                  Limited edition 12" vinyl pressing of YIN/YANG. 180g black vinyl with custom sleeve artwork. Includes digital download.
+                  {vinyl.description}
                 </p>
               </div>
 
               <div className="border-t border-border pt-8 mt-8">
                 <p className="text-[10px] tracking-widest-custom mb-4">DETAILS</p>
                 <div className="space-y-2 text-sm text-muted-foreground">
-                  <p>Format: 12" Vinyl LP</p>
-                  <p>Weight: 180g</p>
-                  <p>Includes: Digital Download</p>
+                  <p>Format: {vinyl.format}</p>
+                  <p>Weight: {vinyl.weight}</p>
+                  <p>Includes: {vinyl.includes}</p>
                 </div>
               </div>
             </motion.div>
