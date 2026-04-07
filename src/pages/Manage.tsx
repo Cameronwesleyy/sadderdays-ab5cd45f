@@ -144,7 +144,7 @@ interface SongEntry {
   sort_order: number;
 }
 
-type Tab = "home" | "copy" | "members" | "tour" | "music" | "lyrics" | "lab" | "shopify" | "meta";
+type Tab = "home" | "copy" | "members" | "tour" | "music" | "lyrics" | "lab" | "shop" | "shopify" | "meta";
 
 interface QuizQuestion {
   question: string;
@@ -270,7 +270,8 @@ const AdminDashboard = () => {
     { id: "music", label: "MUSIC", icon: <Music size={14} /> },
     { id: "lyrics", label: "LYRICS", icon: <BookOpen size={14} /> },
     { id: "lab", label: "LAB", icon: <FlaskConical size={14} /> },
-    { id: "shopify", label: "SHOPIFY", icon: <ShoppingBag size={14} /> },
+    { id: "shop", label: "SHOP / VINYL", icon: <ShoppingBag size={14} /> },
+    { id: "shopify", label: "SHOPIFY", icon: <Link2 size={14} /> },
     { id: "meta", label: "META / SEO", icon: <Settings size={14} /> },
   ];
 
