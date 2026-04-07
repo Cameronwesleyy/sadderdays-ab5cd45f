@@ -1004,6 +1004,7 @@ const AdminDashboard = () => {
               </TabPanel>
             )}
 
+            {activeTab === "shopify" && (
               <TabPanel key="shopify">
                 <SectionTitle>Shop Status</SectionTitle>
                 <div className="p-4 border border-white/10 mb-8 flex items-center justify-between">
