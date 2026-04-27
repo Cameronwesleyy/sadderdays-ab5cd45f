@@ -723,6 +723,11 @@ const AdminDashboard = () => {
                           setTourDates(updated);
                         }}
                       />
+                      {!td.image_url && (
+                        <p className="mt-2 text-[10px] tracking-[0.2em] uppercase text-muted-foreground/70 italic">
+                          No image uploaded — shared tour flyer will be used
+                        </p>
+                      )}
                     </div>
                   ))}
                 </div>
