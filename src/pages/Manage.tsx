@@ -712,6 +712,17 @@ const AdminDashboard = () => {
                           </button>
                         </div>
                       </div>
+                      <ImageDropZone
+                        label="Show Image / Flyer"
+                        currentUrl={td.image_url === "__removed__" ? "" : (td.image_url || "")}
+                        contentKey={`tour-${td.id}`}
+                        folder="tour"
+                        onUpload={(_, url) => {
+                          const updated = [...tourDates];
+                          updated[i] = { ...updated[i], image_url: url === "__removed__" ? "" : url };
+                          setTourDates(updated);
+                        }}
+                      />
                     </div>
                   ))}
                 </div>
