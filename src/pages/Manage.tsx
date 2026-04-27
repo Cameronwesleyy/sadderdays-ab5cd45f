@@ -630,6 +630,7 @@ const AdminDashboard = () => {
                       ticket_link: "",
                       status: "available",
                       sort_order: tourDates.length,
+                      image_url: "",
                     }])}
                     className="flex items-center gap-2 px-3 py-2 text-[10px] tracking-widest-custom border border-white/20 hover:bg-white/10 transition-colors"
                   >
