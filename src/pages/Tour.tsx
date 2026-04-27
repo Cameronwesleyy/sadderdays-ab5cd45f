@@ -19,6 +19,7 @@ interface TourDate {
   status: string;
   ticket_link: string | null;
   sort_order: number;
+  image_url?: string | null;
 }
 
 const Tour = () => {
