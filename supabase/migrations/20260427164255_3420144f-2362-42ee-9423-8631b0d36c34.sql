@@ -1,0 +1,1 @@
+ALTER TABLE public.tour_dates ADD COLUMN IF NOT EXISTS image_url text DEFAULT '';

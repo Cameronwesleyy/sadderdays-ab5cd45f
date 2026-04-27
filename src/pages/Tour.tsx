@@ -19,6 +19,7 @@ interface TourDate {
   status: string;
   ticket_link: string | null;
   sort_order: number;
+  image_url?: string | null;
 }
 
 const Tour = () => {
@@ -122,7 +123,7 @@ const Tour = () => {
                   >
                     <div className="relative overflow-hidden">
                       <img
-                        src={tourFlyer}
+                        src={show.image_url || tourFlyer}
                         alt={`Sadder Days — ${show.city}`}
                         className="w-full h-auto group-hover:scale-[1.02] transition-transform duration-500"
                       />

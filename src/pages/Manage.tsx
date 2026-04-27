@@ -124,6 +124,7 @@ interface TourDate {
   ticket_link: string;
   status: string;
   sort_order: number;
+  image_url?: string;
 }
 
 interface MusicRelease {
@@ -629,6 +630,7 @@ const AdminDashboard = () => {
                       ticket_link: "",
                       status: "available",
                       sort_order: tourDates.length,
+                      image_url: "",
                     }])}
                     className="flex items-center gap-2 px-3 py-2 text-[10px] tracking-widest-custom border border-white/20 hover:bg-white/10 transition-colors"
                   >
@@ -710,6 +712,17 @@ const AdminDashboard = () => {
                           </button>
                         </div>
                       </div>
+                      <ImageDropZone
+                        label="Show Image / Flyer"
+                        currentUrl={td.image_url === "__removed__" ? "" : (td.image_url || "")}
+                        contentKey={`tour-${td.id}`}
+                        folder="tour"
+                        onUpload={(_, url) => {
+                          const updated = [...tourDates];
+                          updated[i] = { ...updated[i], image_url: url === "__removed__" ? "" : url };
+                          setTourDates(updated);
+                        }}
+                      />
                     </div>
                   ))}
                 </div>
