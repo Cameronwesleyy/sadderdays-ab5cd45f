@@ -124,6 +124,7 @@ interface TourDate {
   ticket_link: string;
   status: string;
   sort_order: number;
+  image_url?: string;
 }
 
 interface MusicRelease {
