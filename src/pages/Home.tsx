@@ -128,6 +128,9 @@ const Home = () => {
           if (s.id === "tour_live") setTourLive(s.value === "true");
         });
       }
+      if (tourRes.data && tourRes.data.length > 0) {
+        setNextShow(tourRes.data[0]);
+      }
     });
   }, []);
 
