@@ -460,19 +460,27 @@ const Home = () => {
             </motion.div>
 
             <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className={`space-y-3 flex-shrink-0 text-right ${!tourLive ? "blur-sm select-none" : ""}`}>
-              <div>
-                <p className="text-[10px] tracking-widest-custom text-foreground font-medium">MAR 14</p>
-                <p className="text-[10px] tracking-widest-custom text-muted-foreground">RIDGEWOOD, NY</p>
-                <p className="text-[9px] tracking-widest-custom text-muted-foreground/60">TRANS PECOS</p>
-              </div>
-              <a
-                href="https://posh.vip/e/sadder-days-debut-show"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block text-[9px] tracking-widest-custom text-sd-pink hover:text-foreground transition-colors"
-              >
-                RSVP →
-              </a>
+              {nextShow ? (
+                <>
+                  <div>
+                    <p className="text-[10px] tracking-widest-custom text-foreground font-medium">{nextShow.date}</p>
+                    <p className="text-[10px] tracking-widest-custom text-muted-foreground">{nextShow.city}</p>
+                    <p className="text-[9px] tracking-widest-custom text-muted-foreground/60">{nextShow.venue}</p>
+                  </div>
+                  {nextShow.ticket_link && (
+                    <a
+                      href={nextShow.ticket_link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block text-[9px] tracking-widest-custom text-sd-pink hover:text-foreground transition-colors"
+                    >
+                      GET TICKETS →
+                    </a>
+                  )}
+                </>
+              ) : (
+                <p className="text-[10px] tracking-widest-custom text-muted-foreground">TBA</p>
+              )}
             </motion.div>
           </div>
         </section>
