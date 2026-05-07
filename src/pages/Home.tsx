@@ -115,7 +115,8 @@ const Home = () => {
     Promise.all([
       supabase.from("site_content").select("*"),
       supabase.from("admin_settings").select("*").in("id", ["shop_live", "tour_live"]),
-    ]).then(([contentRes, settingsRes]) => {
+      supabase.from("tour_dates").select("date,city,venue,ticket_link,sort_order").order("sort_order", { ascending: true }),
+    ]).then(([contentRes, settingsRes, tourRes]) => {
       if (contentRes.data) {
         const map: Record<string, string> = {};
         contentRes.data.forEach((r: { id: string; content: string }) => { map[r.id] = r.content; });
