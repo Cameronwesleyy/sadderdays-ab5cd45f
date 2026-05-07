@@ -92,6 +92,7 @@ const Home = () => {
   const [cms, setCms] = useState<Record<string, string>>({});
   const [shopLive, setShopLive] = useState(false);
   const [tourLive, setTourLive] = useState(false);
+  const [nextShow, setNextShow] = useState<{ date: string; city: string; venue: string; ticket_link: string | null } | null>(null);
 
   useEffect(() => {
     const hasSeenPopup = sessionStorage.getItem("hasSeenEmailPopup");
@@ -114,7 +115,8 @@ const Home = () => {
     Promise.all([
       supabase.from("site_content").select("*"),
       supabase.from("admin_settings").select("*").in("id", ["shop_live", "tour_live"]),
-    ]).then(([contentRes, settingsRes]) => {
+      supabase.from("tour_dates").select("date,city,venue,ticket_link,sort_order").order("sort_order", { ascending: true }),
+    ]).then(([contentRes, settingsRes, tourRes]) => {
       if (contentRes.data) {
         const map: Record<string, string> = {};
         contentRes.data.forEach((r: { id: string; content: string }) => { map[r.id] = r.content; });
@@ -125,6 +127,9 @@ const Home = () => {
           if (s.id === "shop_live") setShopLive(s.value === "true");
           if (s.id === "tour_live") setTourLive(s.value === "true");
         });
+      }
+      if (tourRes.data && tourRes.data.length > 0) {
+        setNextShow(tourRes.data[0]);
       }
     });
   }, []);
@@ -455,19 +460,27 @@ const Home = () => {
             </motion.div>
 
             <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className={`space-y-3 flex-shrink-0 text-right ${!tourLive ? "blur-sm select-none" : ""}`}>
-              <div>
-                <p className="text-[10px] tracking-widest-custom text-foreground font-medium">MAR 14</p>
-                <p className="text-[10px] tracking-widest-custom text-muted-foreground">RIDGEWOOD, NY</p>
-                <p className="text-[9px] tracking-widest-custom text-muted-foreground/60">TRANS PECOS</p>
-              </div>
-              <a
-                href="https://posh.vip/e/sadder-days-debut-show"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block text-[9px] tracking-widest-custom text-sd-pink hover:text-foreground transition-colors"
-              >
-                RSVP →
-              </a>
+              {nextShow ? (
+                <>
+                  <div>
+                    <p className="text-[10px] tracking-widest-custom text-foreground font-medium">{nextShow.date}</p>
+                    <p className="text-[10px] tracking-widest-custom text-muted-foreground">{nextShow.city}</p>
+                    <p className="text-[9px] tracking-widest-custom text-muted-foreground/60">{nextShow.venue}</p>
+                  </div>
+                  {nextShow.ticket_link && (
+                    <a
+                      href={nextShow.ticket_link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block text-[9px] tracking-widest-custom text-sd-pink hover:text-foreground transition-colors"
+                    >
+                      GET TICKETS →
+                    </a>
+                  )}
+                </>
+              ) : (
+                <p className="text-[10px] tracking-widest-custom text-muted-foreground">TBA</p>
+              )}
             </motion.div>
           </div>
         </section>
