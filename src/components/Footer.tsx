@@ -30,12 +30,12 @@ const Footer = () => {
             <p className="text-[10px] tracking-widest-custom text-background/50 mb-2">
               REPRESENTATION
             </p>
-            <p className="text-sm mb-4">SADDER DAYS MGMT</p>
+            <p className="text-sm mb-4">Hallwood</p>
             <a 
-              href="mailto:hello@sadderdays.world"
+              href="mailto:sadderdaysband@gmail.com"
               className="text-sm text-background/70 hover:text-background transition-colors hover:underline underline-offset-4"
             >
-              hello@sadderdays.world
+              sadderdaysband@gmail.com
             </a>
           </div>
           <div className="md:col-span-4">
@@ -43,10 +43,10 @@ const Footer = () => {
               PROJECT & DIRECT INQUIRIES
             </p>
             <a 
-              href="mailto:booking@sadderdays.world"
+              href="mailto:sadderdaysband@gmail.com"
               className="text-sm text-background hover:text-background/80 transition-colors hover:underline underline-offset-4"
             >
-              booking@sadderdays.world
+              sadderdaysband@gmail.com
             </a>
           </div>
         </div>
