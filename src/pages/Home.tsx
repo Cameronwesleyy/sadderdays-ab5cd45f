@@ -157,7 +157,7 @@ const Home = () => {
   const heroCaption = cms.home_hero_caption || "CAMERON AND GRANT, NYC 2026";
   const sectionTitle = cms.home_section_title || "I'VE HAD SADDER DAYS";
   const sectionCopy = cms.home_section_copy || "LOREM IPSUM DOLOR SIT AMET CONSECTETUR ADIPISCING ELIT.";
-  const shopDate = cms.home_shop_date || "MARCH 2026";
+  const shopDate = cms.home_shop_date || "COMING SOON";
   const shopCopy = cms.home_shop_copy || "LOREM IPSUM DOLOR SIT AMET CONSECTETUR. ADIPISCING ELIT SED DO EIUSMOD TEMPOR.";
   const gallerySubtitle = cms.home_gallery_subtitle || "NYC, 2024-2025";
   const shopTitle = cms.home_shop_title || "SHOP SADDER DAYS";

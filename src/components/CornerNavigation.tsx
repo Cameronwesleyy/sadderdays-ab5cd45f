@@ -133,7 +133,7 @@ const CornerNavigation = () => {
                           NOTIFY ME
                         </span>
                         <span className="block text-[10px] md:text-xs tracking-widest-custom whitespace-nowrap mt-2 text-foreground text-center">
-                          MARCH 2026
+                          COMING SOON
                         </span>
                       </div>
                     ) : link.name === "SHOP" && shopLive ? (
