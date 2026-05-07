@@ -47,9 +47,6 @@ const Footer = () => {
               className="text-sm text-background hover:text-background/80 transition-colors hover:underline underline-offset-4"
             >
               sadderdaysband@gmail.com
-              className="text-sm text-background hover:text-background/80 transition-colors hover:underline underline-offset-4"
-            >
-              booking@sadderdays.world
             </a>
           </div>
         </div>
