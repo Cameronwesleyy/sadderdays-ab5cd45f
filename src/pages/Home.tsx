@@ -92,6 +92,7 @@ const Home = () => {
   const [cms, setCms] = useState<Record<string, string>>({});
   const [shopLive, setShopLive] = useState(false);
   const [tourLive, setTourLive] = useState(false);
+  const [nextShow, setNextShow] = useState<{ date: string; city: string; venue: string; ticket_link: string | null } | null>(null);
 
   useEffect(() => {
     const hasSeenPopup = sessionStorage.getItem("hasSeenEmailPopup");
